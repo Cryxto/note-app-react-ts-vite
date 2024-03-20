@@ -1,25 +1,30 @@
 import { Modal } from "bootstrap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const NoteModal = (props: { operation: string; showModal: boolean }) => {
+  const [modalInstance, setModalInstance] = useState<Modal | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const modalElement = modalRef.current;
-    if (!modalElement) return;
-    const bootstrapModal = new Modal(modalElement!);
     if (props.showModal) {
-      bootstrapModal.show()
-    } else {
-      bootstrapModal.hide()
+      const modalElement = modalRef.current;
+      if (modalElement) {
+        setModalInstance(new Modal(modalElement));
+      }
     }
-    return () => {
-      bootstrapModal.dispose();
-    };
-  }, [props.showModal]);
+  }, []);
+  useEffect(() => {
+    if (modalInstance) {
+      if (props.showModal) {
+        modalInstance.show();
+      } else {
+        modalInstance.hide();
+        modalInstance.dispose();
+      }
+    }
+  }, [props.showModal, modalInstance]);
   return (
     <div
-      className="modal"
+      className="modal fade"
       ref={modalRef}
       id="modal"
       tabIndex={-1}

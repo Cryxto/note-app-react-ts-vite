@@ -44,7 +44,7 @@ export const NoteList = () => {
       </button>
       {console.log("operation : " + operation)}
       
-      <NoteModal key={operation} operation={operation} showModal={showModal} />
+      <NoteModal operation={operation} showModal={showModal} />
     </>
   );
 };
