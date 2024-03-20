@@ -25,11 +25,8 @@ export const NoteList = () => {
   const [notes, setNotes] = useState<NoteInterface[]>([]);
   const [showModal, setShowModal] = useState(false);
 
-  // const handleAddButton = ()=> setOperation("Add");
   const handleAddButton = ()=> {setOperation("Add"); setShowModal(true);}
-  // const handleAddButton = useEffect((()=>setOperation('Add')),[operation])
   const handleEditButton = ()=> {setOperation("Edit"); setShowModal(true);};
-  // const modal = new Modal.getInstance()
   return (
     <>
       <div className="row">
@@ -42,8 +39,6 @@ export const NoteList = () => {
         className="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#modal"
-        // onClick={()=>setOperation("Add")}>
-        // {/* onClick={handleAddButton}> */}
         onClick={handleAddButton}> 
         Add
       </button>
