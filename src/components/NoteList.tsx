@@ -23,10 +23,12 @@ export const NoteList = () => {
   const [input, setInput] = useState({});
   const [operation, setOperation] = useState("");
   const [notes, setNotes] = useState<NoteInterface[]>([]);
+  const [showModal, setShowModal] = useState(false);
+
   // const handleAddButton = ()=> setOperation("Add");
-  const handleAddButton = ()=> {setOperation("Add");}
+  const handleAddButton = ()=> {setOperation("Add"); setShowModal(true);}
   // const handleAddButton = useEffect((()=>setOperation('Add')),[operation])
-  const handleEditButton = ()=> setOperation("Edit");
+  const handleEditButton = ()=> {setOperation("Edit"); setShowModal(true);};
   // const modal = new Modal.getInstance()
   return (
     <>
@@ -47,7 +49,7 @@ export const NoteList = () => {
       </button>
       {console.log("operation : " + operation)}
       
-      <NoteModal key={operation} operation={operation} />
+      <NoteModal key={operation} operation={operation} showModal={showModal} />
     </>
   );
 };

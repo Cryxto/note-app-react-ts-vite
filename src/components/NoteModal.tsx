@@ -1,14 +1,35 @@
+import { Modal } from "bootstrap";
+import { useEffect, useRef } from "react";
 
-export const NoteModal = (props: { operation: string }) => {
+export const NoteModal = (props: { operation: string , showModal: boolean}) => {
+
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const modalElement = modalRef.current;
+    if (!modalElement) return;
+    const bootstrapModal = new Modal(modalElement!);
+    if (props.showModal) {
+      bootstrapModal.show();
+    } else {
+      bootstrapModal.hide();
+    }
+    return () => {
+      bootstrapModal.dispose();
+    };
+  }, [props.showModal]);
   return (
     <div
-      className="modal fade"
-      // ref={modalRef}
+      // className={`modal fade ${props.showModal ? 'show' : ''}`}
+      className="modal"
+      ref={modalRef}
       id="modal"
       tabIndex={-1}
       aria-labelledby="exampleModalLabel"
       // onClick={() => setShowModal(false)}
-      aria-hidden="true">
+      aria-hidden="true"
+      // aria-hidden={!props.showModal}
+      >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
